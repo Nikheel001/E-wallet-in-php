@@ -1,0 +1,27 @@
+body
+{
+	background-color:aqua;
+	background-repeat:no-repeat;
+	background-attachment:scroll;
+	background-position:center;
+}
+
+h1 ,h2 {
+color: black;
+background:blue;
+padding: 15px;
+font-family:cursive;
+font-size:300%;
+}
+
+td
+{
+	font-family:georgia,sans-serif;
+	color:navy;
+}
+
+a
+{
+	font-style:italic;
+	font-weight:bolder;
+}

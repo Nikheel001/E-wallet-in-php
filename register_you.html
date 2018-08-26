@@ -1,0 +1,146 @@
+<?php
+	session_start();
+	
+?>
+<html>
+	<head>
+		<title>
+			Registration
+		</title>
+		<center><font color='blue'><h1>Please Register yourself</h1></font></center>
+		<link rel="stylesheet" type="text/css" href="myStyle.css">
+	</head>
+<body>
+<form  action='store.php' method='post'>
+<center>
+<table border='0'>
+
+<tr>
+	<td colspan='3'><font color='red'>*Required field</font></td>
+</tr>
+<tr>
+<td>
+	<?php
+		if(isset($_GET['msg']))
+		{
+			echo $_GET['msg'];
+		}
+	?>
+</td>
+</tr>
+<tr>
+	<td>User Name:*</td>
+	<td colspan='2'>
+		<input type='text' name='uname'/>
+	</td>
+</tr>
+<tr>
+	<td>New Password:*</td>
+	<td colspan='2'>
+		<input type='password' name='pwd'>
+	</td>
+</tr>
+<tr>
+	<td>
+		Renter New Password:*
+	</td>
+	<td colspan='2'>
+		<input type='password' name='rpwd'/>
+	</td>
+</tr>
+<tr>
+	<td>
+		<input type='radio' name='gender' value='male'/>
+		Male
+	</td>
+	<td>
+		<input type='radio' name='gender' value='female'/>
+		FeMale
+	</td>
+	<td>
+		<input type='radio' name='gender' value='other'>
+		Other
+	</td>
+</tr>
+<tr>
+	<td>Birthdate :*</td>
+	<td><input type='date' name='date' /></td>
+</tr>
+<tr>
+	<td>
+		Mail Adress:
+	</td>
+	<td>
+		<input type="text" name="mail">
+	</td>
+</tr>
+<tr>
+	<td>
+		Mobile No:*
+	</td>
+	<td>
+		<input type="text" name="mobile">
+	</td>
+</tr>
+<tr>
+	<td>
+		Address:*
+	</td>
+	<td>
+		<input type="text" name="address">
+	</td>
+</tr>
+<tr>
+	<td>
+		Country:
+	</td>
+	<td>
+		<input type="text" name="country">
+	</td>
+</tr>
+
+<tr>
+	<td>
+		Select Security Option :*
+	</td>
+	<td>
+		<select name="security">
+			<option value="1">Who is your favorite HERO ?</option>
+			<option value="2">Which is your favorite book ?</option>
+			<option value="3">What is your nick name ?</option>
+			<option value="4">What is your favorite past time ?</option>
+			<option value="5">What is the name your first school ?</option	>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		Give Answer :
+	</td>
+	<td>
+		<input type="text" name="answer">
+	</td>
+</tr>
+<tr>
+<td>
+&nbsp;
+</td>
+</tr>
+<tr>
+	<td>
+		<input type='submit' value='Submit'/>
+	</td>
+	<td>
+		<input type='reset' value='Reset'/>
+		</td>
+	<td>
+		<a href='index.php'>Home
+		</a>
+	</td>
+</tr>	
+
+</table>
+</center>
+</form>
+</body>
+</html>
