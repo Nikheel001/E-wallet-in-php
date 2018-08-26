@@ -3,9 +3,9 @@
 	session_start();
 	include "./../connection.php";
 	
-	if((isset($_SESSION['unm'])) && (isset($_POST['acno'])) && (isset($_POST['bank_nm'])))
+	if((isset($_SESSION['uname'])) && (isset($_POST['acno'])) && (isset($_POST['bank_nm'])))
 	{
-		$unm=$_SESSION['unm'];
+		$unm=$_SESSION['uname'];
 		$acno = $_POST['acno'];
 		$bank_nm = $_POST['bank_nm'];
 	
@@ -37,5 +37,5 @@
 	
 	}
 	else
-		header("location:./../index.php?msg=You are not authorized to this content or empty data");
+		header("location:C:\wamp64\www\project\index.php?msg=You are not authorized to this content or empty data");
 ?>

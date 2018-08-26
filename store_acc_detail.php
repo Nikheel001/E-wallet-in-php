@@ -1,11 +1,11 @@
 <?php
 	session_start();
-	include "connection.php";
+	include "./../connection.php";
 	
-	if((isset($_SESSION['unm'])) && (isset($_POST['bank_nm'])) && (isset($_POST['acno'])))
+	if((isset($_SESSION['uname'])) && (isset($_POST['bank_nm'])) && (isset($_POST['acno'])))
 	{
 		
-	$unm = $_SESSION['unm'];
+	$unm = $_SESSION['uname'];
 	$acno = $_POST['acno'];
 	
 $tableExists = $dbhandler->query("SHOW TABLES LIKE 'acc_detail' ");
@@ -71,6 +71,6 @@ if(!$tableExists->rowCount() > 0)
 }
 else
 {
-	header("location:./../index.php?msg=Please login first");
+	header("location:C:\wamp64\www\project\index.php?msg=Please login first");
 }
 ?>

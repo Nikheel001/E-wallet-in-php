@@ -3,16 +3,16 @@
 	session_start();
 	include "./../connection.php";
 	
-	if(isset($_SESSION['unm']))
+	if(isset($_SESSION['uname']))
 	{
 		echo "<a href='ewallet.php'>Change account</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='./../signout.php'>Signout</a>";
 		
 		if(isset($_GET['msg2']))
 		{
-			echo $_GET['msg2']."<br>";
+			echo "<br>".$_GET['msg2']."<br>";
 		}
 		
-		$unm=$_SESSION['unm'];
+		$unm=$_SESSION['uname'];
 		$acno=$_SESSION['acno'];
 		$bank_nm = $_SESSION['bank_nm'];
 	
@@ -53,6 +53,6 @@
 	}
 	else
 	{
-		header("location:./../index.php?msg=Please login first");
+		header("location:C:\wamp64\www\project\index.php?msg=Please login first");
 	}
 ?>
