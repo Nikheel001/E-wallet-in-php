@@ -33,5 +33,5 @@
 	</form>";
 	}
 	else
-		header("location:./../index.php?msg=Please login first");
+		header("location:C:\wamp64\www\project\index.php?msg=Please login first");
 ?>
