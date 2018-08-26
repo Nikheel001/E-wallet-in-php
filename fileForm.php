@@ -4,7 +4,7 @@
 </head>
 <body>
 
-<form method="post" action="file.php" enctype="multipart/form-data">
+<form method="post" action="upload.php" enctype="multipart/form-data">
 <table border="1" align="center" width=50%>
 <tr>
 <td colspan="3" align="center" style="color:#00AA00"> <?php 
@@ -20,7 +20,7 @@ if(isset($_GET['msg']))
 
 
 <tr>
-<td>Select Your File: </td> <td colspan="2"><input type="file" name="myFile" id="myFile"></td>
+<td>Select Your File: </td> <td colspan="2"><input type="file" name="uploadFile" id="myFile"></td>
 </tr>
 
 <tr>
