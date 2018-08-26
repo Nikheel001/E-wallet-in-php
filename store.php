@@ -1,140 +1,127 @@
 <?php
-	session_start();
-	include "connection.php";
-/*	$dbhost = '127.0.0.1:3306';
-	$dbuser = 'root';
-	$dbpass = 'root';
-		
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass,'digital_wallet');
-	if(! $conn )
-	{
-		die('Could not connect: ' . mysql_error());
-	}
-	echo 'Connected successfully<br />';
-	
-if(!isset($_COOKIE['database']))
-{
-	$sql="CREATE DATABASE digital_wallet";
-	$query=mysql_query($sql,$conn);
-	if(! $query )
-	{
-		die('Could not create database: ' . mysql_error());
-	}
-	echo "Database created successfuly";
-	setcookie('database','databasecreated',time()+31622400);
-		
-	mysql_select_db('digital_wallet',$conn);
-}*/
-$tableExists = $dbhandler->query("SHOW TABLES LIKE 'user_data'");
-if(!$tableExists->rowCount() > 0)
-{			
-		$sql="create table user_data (
-		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-       	username VARCHAR(30) NOT NULL,
-     	password VARCHAR(20) NOT NULL,
-		gender VARCHAR(10),
-       	birthdate DATE,
-       	mailid VARCHAR(100),
-       	mobileno VARCHAR(20),
-		address VARCHAR(50),
-		country VARCHAR(50),
-		security VARCHAR(50),
-		answer VARCHAR(50)
-		)";
 
-		$query=$dbhandler->query($sql);
-		echo "Table is created successfully..<br><br>";
-		setcookie('table','hello',time()+31622400);
-		$count=0;
-		$_SESSION['count']=$count;
-}
-	
-//	$count=$_SESSION['count'];
-	
-	$uname=$_POST['uname'];														//username
-	$pwd=$_POST['pwd'];															//password	 
-	$date = date('Y-m-d', strtotime($_POST['date']));							//date
-	$gender=$_POST['gender'];
-	$mailid=$_POST['mail'];
-	$mobileno=$_POST['mobile'];
-	$address=$_POST['address'];
-	$country=$_POST['country'];
-	$answer=$_POST['answer'];
-	$temp=$_POST['security'];
-	
-	if($temp == 1)
-		$security="hero";
-	if($temp == 2)
-		$security="book";
-	if($temp == 3)
-		$security="name";
-	if($temp == 4)
-		$security="pasttime";
-	if($temp == 5)
-		$security="firstschool";
-	
-	
-	try
-	{	
+	session_start();
+	$dbhandler = new PDO('mysql:host=127.0.0.1;dbname=digital_wallet','root','');
+		echo "Connection is established...<br/>";
+		$dbhandler->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+	if(isset($_SESSION['uname']))
+	{
+		$uname=$_SESSION['uname'];
 		
-		$sql="INSERT INTO user_data (username,password,gender,birthdate,mailid,mobileno,address,country,security,answer) VALUES ('$uname','$pwd','$gender','$date','$mailid','$mobileno','$address','$country','$security','$answer')";
-		$query=$dbhandler->query($sql);
+		$etitle=$_POST['etitle'];
+		$date= strtotime($_POST['edate']);
+		$edate=date('y-m-d',$date);
+		$interval=$_POST['interval'];
+		$discription=$_POST['discription'];
+		 
 		
-	//	$_SESSION['count'] = $count + 1;
-		
-		echo "<br><br>Data is inserted successfully <br><br>";
-		header("location:index.php?msg=Please login again ...");
-		
-/*		echo "Entered detail are as followed <br><br>";
-		
-		$query=$dbhandler->query("select * from student WHERE id=".$_SESSION['count']."");
-		while($r=$query->fetch()){
-						
-			echo "
-				<table border='2'>
-					<tr>
-						<td>ID :</td>
-						<td>" .$r['id'] ."</td>
-					</tr>
-					<tr>
-						<td>Username :</td>
-						<td>" .$r['username'] ."</td>
-					</tr>
-					<tr>
-						<td>Gender :</td>
-						<td>" .$r['gender'] ."</td>
-					</tr>
-					<tr>
-						<td>Date of Birth[yyyy-dd-mm]</td>
-						<td>".$r['birthdate'] ."</td>
-					</tr>
-					<tr>
-						<td>Training : </td>
-						<td>" .$r['training'] ."</td>
-					</tr>
-					<tr>
-						<td>Placement : </td>
-						<td>" .$r['placement'] ."</td>
-					</tr>
-					<tr>
-						<td>Achievement : </td>
-						<td>" .$r['achievement'] ."</td>
-					</tr>
-					<tr>
-						<td><a href='delete.php'>Delete</a></td>
-					</tr>
-				</table>
-			<br><br>
-			";
+		try
+		{
+			$tableExists = $dbhandler->query("SHOW TABLES LIKE 'etable'");
+			if(!$tableExists->rowCount() > 0)
+			{
+				$sql="
+					CREATE TABLE etable ( username VARCHAR(30) NOT NULL,
+					etitle VARCHAR(30) NOT NULL,
+					edate DATE NOT NULL,
+					discription VARCHAR(100),
+					interval1 INT(6) NOT NULL
+					)
+				";
+				$query=$dbhandler->query($sql);
+			}
 			
+			$query=$dbhandler->query("INSERT INTO etable (username,etitle,edate,discription,interval1) VALUES ('$uname','$etitle','$edate','$discription','$interval')");
+			echo "data inserted successfully";
 			
+			//$con=mysqli_connect("localhost","root","","digital_wallet");
+			//$result=mysqli_query($con,'SELECT * FROM pass');
+			$query=$dbhandler->query("select * from etable");
+			
+			while($row = $query->fetch())
+			{
+				$unm=$row['username'];
+				$pcdate=$row['edate'];
+				$notify=$row['interval1'];
+				$etitle=$row['etitle'];
+				//echo $unm;
+				//echo $pcdate;
+				//echo $notify;
+				//echo $etitle;
+				if($notify==1)
+				{
+					$today = date("Y-m-d");
+					//echo $today;
+					$pcdate = date( 'Y-m-d', strtotime( $pcdate . ' -1 day' ) );	
+					//echo $today;
+					 $date = strtotime($today);
+					$dat = date('Y-m-d', $date);
+					//echo $dat;
+					//echo $pcdate;
+					
+					
+					if($dat==$pcdate )
+					{
+						//echo"Your Event : ".$etitle ."Is Upcoming in " .$notify;
+						$_SESSION['status1']="Your Event : ".$etitle ."Is Upcoming in " .$notify." days";
+					}
+				}
+				if($notify==2)
+				{
+					$today = date("Y-m-d");
+					$pcdate = date( 'Y-m-d', strtotime( $pcdate . ' -2 day' ) );	
+					
+					 $date = strtotime($today);
+					$dat = date('Y-m-d', $date);
+					
+					
+					if($dat==$pcdate )
+					{
+						//echo"Update your password for username  " .$unm;
+						$_SESSION['status1']="Your Event : ".$etitle ."Is Upcoming in " .$notify ." days";
+					}
+				}
+				if($notify==3)
+				{
+					$today = date("Y-m-d");
+					$pcdate=date( 'Y-m-d', strtotime( $pcdate . ' -3 day' ) );	
+					
+					 $date = strtotime($today);
+					$dat = date('Y-m-d', $date);
+					
+					
+					if($dat==$pcdate )
+					{
+						//echo"Update your password for username  " .$unm;
+						$_SESSION['status1']="Your Event : ".$etitle ."Is Upcoming in " .$notify." days";
+					}
+				}
+			echo "<br><br>";
+				
+			}
+			header("location:home.php");
 		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+			die();
+		}
+
+		/*$name = $_POST['name'];
+		$date = strtotime($_POST['date']);
+		$date = date('m-d', $date);
+		setcookie($name,$date,time()+31622400);
+		$today = date('Y-m-d');
+		header("location:home.php?msg1=Reminder is set!");
 		*/
 	}
-	catch(PDOException $e)
+	else
 	{
-		echo $e->getMessage();
-		die();
+		header("location:index.php?msg=Please Login to View Your Home Screen!");
+		echo "Invalid Reference to that page";
 	}
+
+
+
 
 ?>
