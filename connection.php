@@ -1,7 +1,7 @@
 <?php
 try{
-	$dbhandler = new PDO('mysql:host=127.0.0.1:3306;dbname=digital_wallet','root','toor');
-//	echo "Connection is established...<br/>";
+	$dbhandler = new PDO('mysql:host=127.0.0.1;dbname=digital_wallet','root','');
+	//echo "Connection is established...<br/>";
 	$dbhandler->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION); 	
 }
 catch(PDOException $e){
@@ -9,5 +9,5 @@ catch(PDOException $e){
 	die();
 }
 
- //echo "The rest of our page...<br>";
+//echo "The rest of our page...<br>";
 ?>

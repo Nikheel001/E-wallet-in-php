@@ -1,0 +1,45 @@
+<body>
+<script language='javascript'>
+1324;
+function Checkpass()
+{	
+
+	asascsc;
+	var x;
+
+	x = document.getElementById('asdf').value;
+
+	var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;  
+	if(x.value.match(passw))   
+	{   
+	alert('Correct, try another...')  
+	return true;  
+	}  
+	else  
+	{   
+	alert('Wrong...!')  
+	return false;  
+	}  
+}
+</script>
+
+<form  method='post' onsubmit='return Checkpass();'>
+Title:<input type='text' name='title'>
+<br>
+Created Date:&nbsp&nbsp&nbsp<input type='date' name='pdate'>
+<br>
+Enter your Category:&nbsp&nbsp&nbsp<input type='text' name='category'>
+<br>
+Username:&nbsp&nbsp&nbsp<input type='text' name='unm'>
+<br>
+Password:<input type='password' id='asdf' name='text1'>
+
+<input type='Submit'  value='Submit'>
+
+</form>
+</body>
+
+
+
+
+
